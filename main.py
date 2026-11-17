@@ -4,23 +4,15 @@ import math
 import ast
 import operator
 
-# =====================================
-# 1. APPLICATION CONFIGURATION
-# =====================================
-
 window = tk.Tk()
 window.title("Scientific Calculator")
 window.geometry("480x700")
 window.resizable(False, False)
 window.configure(bg="#1e1e2e")
 
-# Calculator state
 angle_mode = tk.StringVar(value="DEG")
 expression = tk.StringVar(value="")
 
-# =====================================
-# 2. MATHEMATICAL FUNCTIONS
-# =====================================
 
 def get_functions():
     if angle_mode.get() == "DEG":
@@ -52,9 +44,6 @@ def get_functions():
     }
 
 
-# =====================================
-# 3. SAFE EXPRESSION EVALUATION
-# =====================================
 
 binary_operations = {
     ast.Add: operator.add,
@@ -134,10 +123,6 @@ def calculate_value(text):
     return evaluate_node(tree)
 
 
-# =====================================
-# 4. CALCULATOR FUNCTIONS
-# =====================================
-
 def insert(value):
     expression.set(expression.get() + value)
 
@@ -195,9 +180,6 @@ def use_result():
         pass
 
 
-# =====================================
-# 5. DISPLAY SECTION
-# =====================================
 
 display_frame = tk.Frame(
     window,
@@ -244,10 +226,6 @@ result_label = tk.Label(
 
 result_label.pack(fill="x", pady=5)
 
-
-# =====================================
-# 6. BUTTON SECTION
-# =====================================
 
 button_frame = tk.Frame(
     window,
@@ -306,9 +284,6 @@ def button_action(value):
         insert(value)
 
 
-# =====================================
-# 7. CREATE AND ARRANGE BUTTONS
-# =====================================
 
 for row_index, row in enumerate(buttons):
     for column_index, value in enumerate(row):
@@ -361,10 +336,6 @@ for i in range(5):
     button_frame.columnconfigure(i, weight=1)
 
 
-# =====================================
-# 8. KEYBOARD SUPPORT
-# =====================================
-
 def keyboard_enter(event):
     calculate()
     return "break"
@@ -383,9 +354,5 @@ def keyboard_delete(event):
 window.bind("<Return>", keyboard_enter)
 window.bind("<Escape>", keyboard_escape)
 window.bind("<BackSpace>", keyboard_delete)
-
-# =====================================
-# 9. START APPLICATION
-# =====================================
 
 window.mainloop()
